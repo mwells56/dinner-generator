@@ -14,8 +14,8 @@ public class DinnerGenerator {
             System.out.print("What is the name of the dish? ");
             String newDish = scanner.nextLine();
 
-            System.out.print("What ingredients does the new recipe require? (separate by comma w/o space) ");
-            String[] newDishIngredients = scanner.nextLine().split(",");
+            System.out.print("What ingredients does the new recipe require? (separate by commas) ");
+            String[] newDishIngredients = scanner.nextLine().split(", ");
 
             List<String> recipeIngredients = new ArrayList<>();
             for (String ingredient : newDishIngredients) {
@@ -27,22 +27,20 @@ public class DinnerGenerator {
             addRecipe = scanner.nextLine();
         }
 
-        System.out.println("Would you like to add ingredients to your kitchen? (y/n) ");
+        System.out.print("Would you like to add ingredients to your kitchen? (y/n) ");
         String addInventory = scanner.nextLine();
 
         while (addInventory.equals("y")) {
             System.out.print("What would you like to add? ");
             String newIngredient = scanner.nextLine();
             kitchenInventory.add(newIngredient);
-            System.out.print("Would you like to add anything else? (y/n)");
+            System.out.print("Would you like to add anything else? (y/n) ");
             addInventory = scanner.nextLine();
         }
 
         for (Map.Entry<String, List<String>> recipe : recipeMap.entrySet()) {
             if (kitchenInventory.containsAll(recipe.getValue())) {
-                System.out.println("You could make " + recipe.getKey());
-            } else {
-                System.out.println("You do not have the ingredients to make " + recipe.getKey());
+                System.out.println("\nYou could make " + recipe.getKey());
             }
         }
 
