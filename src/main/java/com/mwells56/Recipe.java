@@ -1,3 +1,5 @@
+package com.mwells56;
+
 import java.util.*;
 
 public class Recipe {

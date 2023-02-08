@@ -32,7 +32,7 @@
   </component>
   <component name="RunManager">
     <configuration name="DinnerGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DinnerGenerator" />
+      <option name="MAIN_CLASS_NAME" value="com.mwells56.DinnerGenerator" />
       <module name="dinner-generator" />
       <method v="2">
         <option name="Make" enabled="true" />
