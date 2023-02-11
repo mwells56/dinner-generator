@@ -1,5 +1,7 @@
 package com.mwells56;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,35 +10,51 @@ public class Cookbook {
 
     private Scanner userInput = new Scanner(System.in);
 
-    public void displayCookbook () {
+    private static List<Recipe> cookbook;
 
+    public void loadCookbook() {
+        File cookbookFile = new File ("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\cookbook.txt");
+
+        if (cookbookFile.exists()) {
+            try (Scanner cookbookFileContents = new Scanner(cookbookFile)) {
+                while (cookbookFileContents.hasNextLine()) {
+                    String recipeString = cookbookFileContents.nextLine();
+
+                    String[] recipeAndIngredientsArray = recipeString.split("\\|");
+
+                    String dishName = recipeAndIngredientsArray[0];
+
+                    List<String> ingredientsList = new ArrayList<>();
+                    String[] ingredientsArray = recipeAndIngredientsArray[1].split(",");
+                    for (String ingredient : ingredientsArray) {
+                        ingredientsList.add(ingredient);
+                    }
+
+                    Recipe recipe = new Recipe(dishName, ingredientsList);
+                    cookbook.add(recipe);
+                }
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found.");
+            }
+        }
+    }
+
+    public static List<Recipe> getCookbook() {
+        return cookbook;
+    }
+
+    public void displayCookbook () {
+        for (Recipe recipe : cookbook) {
+            String dishName = recipe.getDishName();
+            String ingredients = String.join(", ", recipe.getIngredients());
+
+            System.out.println("Dish: " + recipe.getDishName());
+            System.out.println("Ingredients: " + ingredients + "\n");
+        }
     }
 
     public void addToCookbook() {
-        // Ask user if there are any new recipes to add
-        System.out.print("Would you like to add any recipes? (y/n) ");
-        String addRecipe = userInput.nextLine();
 
-        while (addRecipe.equals("y")) {
-            // Ask for dish name and ingredients
-            System.out.print("What is the name of the dish? ");
-            String newDish = userInput.nextLine();
-
-            System.out.print("What ingredients does the new recipe require? (separate by commas) ");
-            String[] newDishIngredients = userInput.nextLine().split(", ");
-
-            // Pull ingredients into a list to be used for a new recipe instance
-            List<String> recipeIngredients = new ArrayList<>();
-            for (String ingredient : newDishIngredients) {
-                recipeIngredients.add(ingredient.toLowerCase());
-            }
-            Recipe addDish = new Recipe (newDish.toLowerCase(), recipeIngredients);
-
-            // Add new recipe to the map
-            recipeMap.put(addDish.getDishName(), addDish.getIngredients());
-            System.out.print("Would you like to add another recipe? (y/n) ");
-            addRecipe = userInput.nextLine();
-        }
     }
 
     public void removeFromCookbook() {

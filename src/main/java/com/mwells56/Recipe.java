@@ -11,11 +11,11 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public static String getDishName() {
+    public String getDishName() {
         return dishName;
     }
 
-    public static List<String> getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 }
