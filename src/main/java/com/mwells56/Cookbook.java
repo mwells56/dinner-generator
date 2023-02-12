@@ -43,9 +43,9 @@ public class Cookbook {
     }
 
     public void displayCookbook () {
-        for (Recipe recipe : cookbook) {
+        for (Recipe recipe : getCookbook()) {
             String dishName = recipe.getDishName();
-            String ingredients = String.join(", ", recipe.getIngredients());
+            String ingredients = String.join(",", recipe.getIngredients());
 
             System.out.println("Dish: " + recipe.getDishName());
             System.out.println("Ingredients: " + ingredients + "\n");
@@ -60,10 +60,10 @@ public class Cookbook {
         String recipeName = userInput.nextLine().toLowerCase();
 
         System.out.println("What ingredients do you need for? (comma separated)");
-        String ingredients = userInput.nextLine().toLowerCase();
+        String ingredients = userInput.nextLine().toLowerCase().replace(", ", ",");
 
         try (PrintWriter cookbookWriter = new PrintWriter(new FileOutputStream(cookbookFile, append))) {
-          cookbookWriter.println(recipeName + "\\|" + ingredients);
+          cookbookWriter.println(recipeName + "|" + ingredients);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }

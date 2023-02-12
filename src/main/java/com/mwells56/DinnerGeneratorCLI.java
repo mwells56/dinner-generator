@@ -45,54 +45,39 @@ public class DinnerGeneratorCLI {
         while (programRunning) {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
-            switch (choice) {
-                case (MAIN_MENU_OPTION_GENERATE_DINNER_IDEA):
-                    dinnerGenerator.generateRecipes();
-                    break;
-                case (MAIN_MENU_OPTION_KITCHEN):
-                    boolean inKitchen = true;
-                    while (inKitchen) {
-                        String kitchenMenuChoice = (String) menu.getChoiceFromOptions(KITCHEN_MENU_OPTIONS);
-
-                        switch (kitchenMenuChoice) {
-                            case (KITCHEN_MENU_OPTION_DISPLAY_ITEMS):
-                                kitchen.displayKitchen();
-                                break;
-                            case (KITCHEN_MENU_OPTION_ADD_ITEMS):
-                                kitchen.addToKitchen();
-                                break;
-                            case (KITCHEN_MENU_OPTION_REMOVE_ITEMS):
-                                kitchen.removeFromKitchen();
-                                break;
-                            case (KITCHEN_MENU_OPTION_EXIT):
-                                inKitchen = false;
-                                choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-                        }
+            if (choice.equals(MAIN_MENU_OPTION_GENERATE_DINNER_IDEA)) {
+                dinnerGenerator.generateRecipes();
+            } else if (choice.equals(MAIN_MENU_OPTION_KITCHEN)) {
+                boolean inKitchen = true;
+                while (inKitchen) {
+                    String kitchenMenuChoice = (String) menu.getChoiceFromOptions(KITCHEN_MENU_OPTIONS);
+                    if (kitchenMenuChoice.equals(KITCHEN_MENU_OPTION_DISPLAY_ITEMS)) {
+                        kitchen.displayKitchen();
+                    } else if (kitchenMenuChoice.equals(KITCHEN_MENU_OPTION_ADD_ITEMS)) {
+                        kitchen.addToKitchen();
+                    } else if (kitchenMenuChoice.equals(KITCHEN_MENU_OPTION_REMOVE_ITEMS)) {
+                        kitchen.removeFromKitchen();
+                    } else if (kitchenMenuChoice.equals(KITCHEN_MENU_OPTION_EXIT)) {
+                        inKitchen = false;
                     }
-                case (MAIN_MENU_OPTION_COOKBOOK):
-                    boolean inCookbook = true;
-                    while (inCookbook) {
-                        String cookbookMenuChoice = (String) menu.getChoiceFromOptions(KITCHEN_MENU_OPTIONS);
+                }
 
-                        switch (cookbookMenuChoice) {
-                            case (COOKBOOK_MENU_OPTION_DISPLAY_RECIPES):
-                                cookbook.displayCookbook();
-                                break;
-                            case (COOKBOOK_MENU_OPTION_ADD_RECIPE):
-                                cookbook.addToCookbook();
-                                break;
-                            case (COOKBOOK_MENU_OPTION_REMOVE_RECIPE):
-                                cookbook.removeFromCookbook();
-                                break;
-                            case (COOKBOOK_MENU_OPTION_EXIT):
-                                inCookbook = false;
-                                choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
-                        }
+            } else if (choice.equals(MAIN_MENU_OPTION_COOKBOOK)) {
+                boolean inCookbook = true;
+                while (inCookbook) {
+                    String kitchenMenuChoice = (String) menu.getChoiceFromOptions(COOKBOOK_MENU_OPTIONS);
+                    if (kitchenMenuChoice.equals(COOKBOOK_MENU_OPTION_DISPLAY_RECIPES)) {
+                        cookbook.displayCookbook();
+                    } else if (kitchenMenuChoice.equals(COOKBOOK_MENU_OPTION_ADD_RECIPE)) {
+                        cookbook.addToCookbook();
+                    } else if (kitchenMenuChoice.equals(COOKBOOK_MENU_OPTION_REMOVE_RECIPE)) {
+                        cookbook.removeFromCookbook();
+                    } else if (kitchenMenuChoice.equals(COOKBOOK_MENU_OPTION_EXIT)) {
+                        inCookbook = false;
                     }
-                case (MAIN_MENU_OPTION_EXIT):
-                    System.out.println("Thank you for using the Dinner Generator. Bone apple tea!");
-                    programRunning = false;
-                    break;
+                }
+            } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+                programRunning = false;
             }
         }
     }

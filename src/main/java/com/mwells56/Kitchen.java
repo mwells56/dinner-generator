@@ -35,7 +35,7 @@ public class Kitchen {
     }
 
     public void displayKitchen() {
-        for (String ingredient : kitchenInventory) {
+        for (String ingredient : getKitchenInventory()) {
             System.out.println(ingredient);
         }
     }
@@ -45,7 +45,7 @@ public class Kitchen {
         boolean append = kitchenInventoryFile.exists();
 
         System.out.println("What ingredients would you like to add? (comma separated)");
-        String[] ingredientsToAddArray = userInput.nextLine().toLowerCase().split(",");
+        String[] ingredientsToAddArray = userInput.nextLine().toLowerCase().replace(", ", ",").split(",");
 
         try (PrintWriter kitchenWriter = new PrintWriter(new FileOutputStream(kitchenInventoryFile, append))) {
             for (String ingredient : ingredientsToAddArray) {
