@@ -3,8 +3,8 @@ package com.mwells56;
 import java.util.*;
 
 public class Recipe {
-    private static String dishName;
-    private static List<String> ingredients;
+    private String dishName;
+    private List<String> ingredients;
 
     public Recipe(String dishName, List<String> ingredients) {
         this.dishName = dishName;

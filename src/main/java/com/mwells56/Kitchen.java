@@ -54,9 +54,38 @@ public class Kitchen {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+
+        kitchenInventory = loadKitchen();
     }
 
     public void removeFromKitchen() {
+        File kitchenInventoryFile = new File("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\kitchen-inventory.txt");
+        File tempKitchenInventoryFile = new File("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\tempKitchenInventoryFile.txt");
 
+        System.out.println("What ingredient would you like to remove?");
+        String ingredientToRemove = userInput.nextLine();
+
+        try (Scanner kitchenInventory = new Scanner(kitchenInventoryFile); PrintWriter tempKitchenWriter = new PrintWriter(new FileOutputStream(tempKitchenInventoryFile, false))) {
+            while (kitchenInventory.hasNextLine()) {
+                String ingredient = kitchenInventory.nextLine();
+                if (!ingredient.equalsIgnoreCase(ingredientToRemove)) {
+                    tempKitchenWriter.println(ingredient);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+
+        try (Scanner tempKitchenInventory = new Scanner(tempKitchenInventoryFile); PrintWriter kitchenWriter = new PrintWriter(new FileOutputStream(kitchenInventoryFile, false))) {
+            while (tempKitchenInventory.hasNextLine()) {
+                String ingredient = tempKitchenInventory.nextLine();
+                kitchenWriter.println(ingredient);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+
+        tempKitchenInventoryFile.delete();
+        kitchenInventory = loadKitchen();
     }
 }

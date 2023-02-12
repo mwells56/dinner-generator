@@ -54,7 +54,6 @@ public class Cookbook {
 
     public void addToCookbook() {
         File cookbookFile = new File ("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\cookbook.txt");
-        boolean append = cookbookFile.exists();
 
         System.out.println("What is the name of the dish you would like to add?");
         String recipeName = userInput.nextLine().toLowerCase();
@@ -62,14 +61,45 @@ public class Cookbook {
         System.out.println("What ingredients do you need for? (comma separated)");
         String ingredients = userInput.nextLine().toLowerCase().replace(", ", ",");
 
-        try (PrintWriter cookbookWriter = new PrintWriter(new FileOutputStream(cookbookFile, append))) {
+        try (PrintWriter cookbookWriter = new PrintWriter(new FileOutputStream(cookbookFile, true))) {
           cookbookWriter.println(recipeName + "|" + ingredients);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
+        cookbook = loadCookbook();
     }
 
     public void removeFromCookbook() {
+        File cookbookFile = new File("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\cookbook.txt");
+        File tempCookbookFile = new File("C:\\Users\\Student\\workspace\\dinner-generator\\src\\main\\resources\\tempCookbook.txt");
 
+        System.out.println("What dish would you like to remove?");
+        String recipeToRemove = userInput.nextLine();
+
+        try (Scanner cookbook = new Scanner(cookbookFile); PrintWriter tempCookbookWriter = new PrintWriter(new FileOutputStream(tempCookbookFile, false))) {
+            while (cookbook.hasNextLine()) {
+                String recipeString = cookbook.nextLine();
+                String[] recipeArray = recipeString.split("\\|");
+                String recipeName = recipeArray[0];
+
+                if (!recipeName.equalsIgnoreCase(recipeToRemove)) {
+                    tempCookbookWriter.println(recipeString);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+
+        try (Scanner tempCookbook = new Scanner(tempCookbookFile); PrintWriter cookbookWriter = new PrintWriter(new FileOutputStream(cookbookFile, false))) {
+            while (tempCookbook.hasNextLine()) {
+                String ingredient = tempCookbook.nextLine();
+                cookbookWriter.println(ingredient);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+
+        tempCookbookFile.delete();
+        cookbook = loadCookbook();
     }
 }
