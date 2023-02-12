@@ -1,7 +1,6 @@
 package com.mwells56;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 public class DinnerGeneratorCLI {
@@ -31,7 +30,8 @@ public class DinnerGeneratorCLI {
     private static final String[] COOKBOOK_MENU_OPTIONS = {COOKBOOK_MENU_OPTION_DISPLAY_RECIPES, COOKBOOK_MENU_OPTION_ADD_RECIPE,
             COOKBOOK_MENU_OPTION_REMOVE_RECIPE, COOKBOOK_MENU_OPTION_EXIT};
 
-    private DinnerGeneratorMenu menu;
+    private DinnerGeneratorMenu menu = new DinnerGeneratorMenu(System.in, System.out);
+
     private DinnerGenerator dinnerGenerator = new DinnerGenerator();
     private Kitchen kitchen = new Kitchen();
     private Cookbook cookbook = new Cookbook();
@@ -66,10 +66,9 @@ public class DinnerGeneratorCLI {
                                 break;
                             case (KITCHEN_MENU_OPTION_EXIT):
                                 inKitchen = false;
-                                break;
+                                choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
                     }
-                    break;
                 case (MAIN_MENU_OPTION_COOKBOOK):
                     boolean inCookbook = true;
                     while (inCookbook) {
@@ -87,7 +86,7 @@ public class DinnerGeneratorCLI {
                                 break;
                             case (COOKBOOK_MENU_OPTION_EXIT):
                                 inCookbook = false;
-                                break;
+                                choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
                         }
                     }
                 case (MAIN_MENU_OPTION_EXIT):

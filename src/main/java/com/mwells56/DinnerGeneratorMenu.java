@@ -9,8 +9,6 @@ public class DinnerGeneratorMenu {
     private PrintWriter out;
     private Scanner in;
 
-    static Scanner userInput = new Scanner(System.in);
-
     public DinnerGeneratorMenu(InputStream input, OutputStream output) {
         this.out = new PrintWriter(output);
         this.in = new Scanner(input);
@@ -34,7 +32,7 @@ public class DinnerGeneratorMenu {
                 choice = options[selectedOption - 1];
             }
         } catch (NumberFormatException e) {
-            // eat the exception, an error message will be displayed below since choice will be null
+            System.out.println("Number incorrectly formatted");
         }
         if (choice == null) {
             out.println(System.lineSeparator() + "*** " + userInput + " is not a valid option ***" + System.lineSeparator());

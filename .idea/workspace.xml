@@ -30,7 +30,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.updates" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.DinnerGeneratorCLI">
     <configuration name="DinnerGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.mwells56.DinnerGenerator" />
       <module name="dinner-generator" />
@@ -38,9 +38,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DinnerGeneratorCLI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mwells56.DinnerGeneratorCLI" />
+      <module name="dinner-generator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mwells56.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DinnerGeneratorMenu" />
+        <item itemvalue="Application.DinnerGeneratorCLI" />
       </list>
     </recent_temporary>
   </component>
@@ -54,5 +67,15 @@
       <updated>1675446771889</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
